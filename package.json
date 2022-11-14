@@ -2,12 +2,16 @@
   "name": "ultimate-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "rebuild:be": "docker compose build backend && docker compose rm --stop backend && docker compose up -d backend",
     "build": "rimraf dist && swc ./src -d dist",
     "start": "node dist/index.js",
-    "start:docker": "pnpm build && node --inspect=0.0.0.0 dist/index.js"
+    "start:docker": "pnpm build && node --inspect=0.0.0.0 dist/index.js",
+    "lint:check": "eslint 'src/**/*.ts' && eslint 'prisma/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' && eslint 'prisma/**/*.ts' --fix",
+    "prettier:check": "prettier --check 'src/**/*.ts' && prettier 'prisma/**/*.ts'",
+    "prettier:fix": "prettier --write 'src/**/*.{ts, json}' && prettier 'prisma/**/*.ts'"
   },
   "keywords": [],
   "author": "",
@@ -27,8 +31,10 @@
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
+    "@typescript-eslint/parser": "^5.43.0",
     "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.7.1",
     "prisma": "^4.6.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1"
